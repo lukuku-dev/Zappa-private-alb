@@ -1550,6 +1550,12 @@ class Zappa:
         # Bind listener to load balancer with default rule to target group.
         # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_listener
         kwargs = dict(
+            DefaultActions=[
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": target_group_arn,
+                }
+            ],
             LoadBalancerArn=load_balancer_arn,
             Protocol="HTTP",
             # TODO: Add option for custom ports
