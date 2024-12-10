@@ -1546,18 +1546,10 @@ class Zappa:
         # Bind listener to load balancer with default rule to target group.
         # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/elbv2.html#ElasticLoadBalancingv2.Client.create_listener
         kwargs = dict(
-            # TODO: Listeners support custom ssl certificates (Certificates). For now we leave this default.
-            Certificates=[{"CertificateArn": alb_vpc_config["CertificateArn"]}],
-            DefaultActions=[
-                {
-                    "Type": "forward",
-                    "TargetGroupArn": target_group_arn,
-                }
-            ],
             LoadBalancerArn=load_balancer_arn,
-            Protocol="HTTPS",
+            Protocol="HTTP",
             # TODO: Add option for custom ports
-            Port=443,
+            Port=80,
             # TODO: Listeners support custom ssl security policy (SslPolicy). For now we leave this default.
         )
         response = self.elbv2_client.create_listener(**kwargs)
