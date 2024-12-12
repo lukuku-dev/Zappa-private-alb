@@ -1447,6 +1447,11 @@ class Zappa:
         """
         The `zappa deploy` functionality for ALB infrastructure.
         """
+    # 추가한 옵션 확인
+        if 'deploy' in alb_vpc_config and alb_vpc_config['deploy'] == False:
+            print("ALB 배포가 비활성화되었습니다(deploy: false). ALB를 배포하지 않습니다.")
+            return
+
         if not alb_vpc_config:
             raise EnvironmentError("When creating an ALB, alb_vpc_config must be filled out in zappa_settings.")
         if "SubnetIds" not in alb_vpc_config:
