@@ -1447,7 +1447,6 @@ class Zappa:
         """
         The `zappa deploy` functionality for ALB infrastructure.
         """
-    # 추가한 옵션 확인
         if not alb_vpc_config.get('alb_deploy', False):
             print("ALB 배포가 비활성화되었습니다(alb_deploy: false). ALB를 배포하지 않습니다.")
             return
