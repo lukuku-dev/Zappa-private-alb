@@ -1208,23 +1208,23 @@ class Zappa:
         # function alias.
         # Related: https://github.com/Miserlou/Zappa/pull/1730
         #          https://github.com/Miserlou/Zappa/issues/1823
-        try:
-            response = self.lambda_client.get_alias(
-                FunctionName=function_name,
-                Name=ALB_LAMBDA_ALIAS,
-            )
-            alias_exists = True
-        except botocore.exceptions.ClientError as e:  # pragma: no cover
-            if "ResourceNotFoundException" not in e.response["Error"]["Code"]:
-                raise e
-            alias_exists = False
+        # try:
+        #     response = self.lambda_client.get_alias(
+        #         FunctionName=function_name,
+        #         Name=ALB_LAMBDA_ALIAS,
+        #     )
+        #     alias_exists = True
+        # except botocore.exceptions.ClientError as e:  # pragma: no cover
+        #     if "ResourceNotFoundException" not in e.response["Error"]["Code"]:
+        #         raise e
+        #     alias_exists = False
 
-        if alias_exists:
-            self.lambda_client.update_alias(
-                FunctionName=function_name,
-                FunctionVersion=version,
-                Name=ALB_LAMBDA_ALIAS,
-            )
+        # if alias_exists:
+        #     self.lambda_client.update_alias(
+        #         FunctionName=function_name,
+        #         FunctionVersion=version,
+        #         Name=ALB_LAMBDA_ALIAS,
+        #     )
 
         if concurrency is not None:
             self.lambda_client.put_function_concurrency(
